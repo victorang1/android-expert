@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">CapstoneProject</string>
     <string name="title_favorite">Favorite</string>
+    <string name="no_data">Empty data</string>
+    <string name="something_wrong">Oops.. something went wrong</string>
 </resources>

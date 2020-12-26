@@ -1,21 +1,20 @@
 package com.example.capstoneproject.di
 
+import com.example.capstoneproject.ui.detail.DetailViewModel
+import com.example.capstoneproject.ui.home.HomeViewModel
 import com.example.core.domain.interactor.FavoriteInteractor
 import com.example.core.domain.interactor.MovieInteractor
 import com.example.core.domain.usecase.FavoriteUseCase
 import com.example.core.domain.usecase.MovieUseCase
-import dagger.Binds
-import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.dsl.module
 
-@Module
-@InstallIn(ApplicationComponent::class)
-abstract class AppModule {
+val useCaseModule = module {
+    factory<MovieUseCase> { MovieInteractor(get()) }
+    factory<FavoriteUseCase> { FavoriteInteractor(get()) }
+}
 
-    @Binds
-    abstract fun provideMovieUseCase(movieInteractor: MovieInteractor): MovieUseCase
-
-    @Binds
-    abstract fun provideFavoriteUseCase(favoriteInteractor: FavoriteInteractor): FavoriteUseCase
+val viewModelModule = module {
+    viewModel { HomeViewModel(get()) }
+    viewModel { DetailViewModel(get()) }
 }

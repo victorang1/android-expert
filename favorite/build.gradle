@@ -3,7 +3,6 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
 }
 apply from: '../shared_dependencies.gradle'
 
@@ -45,5 +44,6 @@ android {
 dependencies {
     implementation project(":core")
     implementation project(":app")
+    implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }

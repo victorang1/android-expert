@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MovieCatalogue</string>
+    <string name="text_movies">Movies</string>
+    <string name="text_tv_shows">Tv Shows</string>
+    <string name="text_movie_thumbnail">A Movie Thumbnail</string>
+    <string name="text_film_category">Film Category</string>
+    <string name="text_overview">Overview</string>
+    <string name="text_type_movie">Movie</string>
+    <string name="text_type_tv_show">TvShow</string>
+    <string name="text_no_data">No data</string>
+    <string name="text_logo">Application Logo</string>
+    <string name="text_movie">Movie</string>
+    <string name="text_catalogue">Catalogue</string>
+    <string name="text_favorite">Catalogue</string>
+
+    <string name="text_network_error">Something went wrong please try again later</string>
+    <string name="add_to_favorite">Add to Favorite</string>
+    <string name="already_favorite">Already added to favorite</string>
+    <string name="remove_from_favorite">Remove from Favorite</string>
+    <string name="text_confirmation">Confirmation</string>
+    <string name="text_add_favorite_dialog">Are you sure you want to add this film to favorite?</string>
+    <string name="text_remove_favorite_dialog">Are you sure you want to remove this film from favorite</string>
+    <string name="text_yes">Yes</string>
+    <string name="text_no">Cancel</string>
+    <string name="text_no_category">No Category</string>
+    <string name="text_add_to_favorite_success">Added to favorite success</string>
+    <string name="text_remove_from_favorite_success">Removed from favorite success</string>
+    <string name="search">Search</string>
+    <string name="text_search_hint">Input name</string>
+</resources>
