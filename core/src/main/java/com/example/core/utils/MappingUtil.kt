@@ -33,7 +33,20 @@ object MappingUtil {
                 it.popularity,
                 it.voteCount,
                 it.releaseDate,
-                it.overview
+                it.overview,
+                it.isFavorite
             )
         }
+
+    fun mapDomainToEntities(it: Movie): MovieEntity =
+        MovieEntity(
+            it.id,
+            it.image,
+            it.title,
+            it.popularity,
+            it.voteCount,
+            it.releaseDate,
+            it.overview,
+            it.isFavorite
+        )
 }

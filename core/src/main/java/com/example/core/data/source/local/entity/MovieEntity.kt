@@ -1,7 +1,5 @@
 package com.example.core.data.source.local.entity
 
-import androidx.databinding.BaseObservable
-import androidx.databinding.Bindable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -15,4 +13,5 @@ data class MovieEntity(
     val voteCount: Long,
     val releaseDate: String,
     val overview: String,
+    var isFavorite: Boolean = false
 )

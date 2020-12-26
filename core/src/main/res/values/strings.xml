@@ -24,7 +24,7 @@
     <string name="text_yes">Yes</string>
     <string name="text_no">Cancel</string>
     <string name="text_no_category">No Category</string>
-    <string name="text_add_to_favorite_success">Added to favorite success</string>
+    <string name="text_add_to_favorite_success">Add to favorite success</string>
     <string name="text_remove_from_favorite_success">Removed from favorite success</string>
     <string name="search">Search</string>
     <string name="text_search_hint">Input name</string>

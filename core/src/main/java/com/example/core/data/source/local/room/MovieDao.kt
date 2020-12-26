@@ -17,4 +17,7 @@ interface MovieDao {
 
     @Update
     fun updateMovie(movie: MovieEntity)
+//
+//    @Query("SELECT * FROM favorite where title LIKE '%' || :title || '%'")
+//    fun filterFilms(title: String): Flow<List<FavoriteEntity>>
 }

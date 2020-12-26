@@ -1,6 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="film"
+            type="com.example.core.domain.model.Movie" />
+        <variable
+            name="isLoading"
+            type="Boolean" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            tools:context=".ui.detail.FilmDetailActivity"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="@{isLoading ? View.GONE : View.VISIBLE}"
+                    android:padding="@dimen/dimen_12dp"
+                    >
+
+                    <ImageView
+                        android:id="@+id/iv_thumbnail"
+                        android:layout_width="@dimen/large_img_width"
+                        android:layout_height="@dimen/large_img_height"
+                        android:scaleType="fitXY"
+                        android:adjustViewBounds="true"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        android:contentDescription="@string/text_movie_thumbnail" />
+
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_12dp"
+                        android:layout_marginEnd="@dimen/dimen_8dp"
+                        android:textColor="@color/purple_700"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/text_24sp"
+                        android:fontFamily="serif"
+                        android:text="@{film.title}"
+                        tools:text="Avenger: Infinity Wars"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toRightOf="@id/iv_thumbnail"
+                        app:layout_constraintRight_toRightOf="parent"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_year"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_8dp"
+                        android:layout_marginStart="@dimen/dimen_12dp"
+                        android:layout_marginEnd="@dimen/dimen_8dp"
+                        android:textColor="@color/purple_700"
+                        android:textSize="@dimen/text_20sp"
+                        android:fontFamily="serif"
+                        android:text="@{film.releaseDate}"
+                        tools:text="2019"
+                        app:drawableStartCompat="@drawable/ic_calendar"
+                        android:drawablePadding="@dimen/dimen_8dp"
+                        app:layout_constraintTop_toBottomOf="@id/tv_title"
+                        app:layout_constraintLeft_toRightOf="@id/iv_thumbnail"
+                        app:layout_constraintRight_toRightOf="parent"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_popularity"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_8dp"
+                        android:layout_marginStart="@dimen/dimen_12dp"
+                        android:layout_marginEnd="@dimen/dimen_8dp"
+                        app:drawableStartCompat="@drawable/ic_star"
+                        android:drawablePadding="@dimen/dimen_8dp"
+                        android:textColor="@color/purple_700"
+                        android:textSize="@dimen/text_20sp"
+                        android:fontFamily="serif"
+                        android:text="@{film.popularityDisplay}"
+                        tools:text="1002.222"
+                        app:layout_constraintTop_toBottomOf="@id/tv_year"
+                        app:layout_constraintLeft_toRightOf="@id/iv_thumbnail"
+                        app:layout_constraintRight_toRightOf="parent"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_votes"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_8dp"
+                        android:layout_marginStart="@dimen/dimen_12dp"
+                        android:layout_marginEnd="@dimen/dimen_8dp"
+                        app:drawableStartCompat="@drawable/ic_thumb_up"
+                        android:drawablePadding="@dimen/dimen_8dp"
+                        android:textColor="@color/purple_700"
+                        android:textSize="@dimen/text_20sp"
+                        android:fontFamily="serif"
+                        android:text="@{film.voteCountDisplay}"
+                        tools:text="272"
+                        app:layout_constraintTop_toBottomOf="@id/tv_popularity"
+                        app:layout_constraintLeft_toRightOf="@id/iv_thumbnail"
+                        app:layout_constraintRight_toRightOf="parent"
+                        />
+
+                    <androidx.constraintlayout.widget.Barrier
+                        android:id="@+id/barrier"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:barrierDirection="bottom"
+                        app:constraint_referenced_ids="iv_thumbnail,tv_votes"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_overview"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_12dp"
+                        android:text="@string/text_overview"
+                        android:textSize="@dimen/text_24sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/purple_700"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/barrier"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_overview_display"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_4dp"
+                        android:text="@{film.overview}"
+                        android:textSize="@dimen/text_20sp"
+                        android:textColor="@color/purple_700"
+                        tools:text="Test ini overview"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_overview"
+                        />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_favorite"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_12dp"
+                        android:text="@string/add_to_favorite"
+                        android:textColor="@color/colorWhite"
+                        android:backgroundTint="@color/purple_700"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_overview_display"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{isLoading ? View.VISIBLE : View.GONE}"
+                    android:layout_centerInParent="true"
+                    />
+
+            </RelativeLayout>
+
+        </ScrollView>
+
+        <include
+            android:id="@+id/view_error"
+            layout="@layout/view_error"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </FrameLayout>
+
+</layout>

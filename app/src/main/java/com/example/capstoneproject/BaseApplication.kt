@@ -1,7 +1,11 @@
 package com.example.capstoneproject
 
 import android.app.Application
-import com.example.capstoneproject.di.appComponent
+import com.example.capstoneproject.di.useCaseModule
+import com.example.capstoneproject.di.viewModelModule
+import com.example.core.di.databaseModule
+import com.example.core.di.networkModule
+import com.example.core.di.repositoryModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -14,7 +18,7 @@ open class BaseApplication : Application() {
         startKoin {
             androidLogger(Level.NONE)
             androidContext(this@BaseApplication)
-            modules(appComponent)
+            modules(useCaseModule, viewModelModule, databaseModule, networkModule, repositoryModule)
         }
     }
 }

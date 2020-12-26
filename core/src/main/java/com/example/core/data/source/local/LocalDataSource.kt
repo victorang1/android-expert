@@ -10,7 +10,8 @@ class LocalDataSource(private val movieDao: MovieDao) {
 
     suspend fun insertMovie(movies: List<MovieEntity>) = movieDao.insertMovie(movies)
 
-    fun updateFilm(movie: MovieEntity) = movieDao.updateMovie(movie)
-
-    fun getMovieById(id: Int): Flow<MovieEntity> = movieDao.getMovieById(id)
+    fun updateMovie(movie: MovieEntity, status: Boolean) {
+        movie.isFavorite = status
+        movieDao.updateMovie(movie)
+    }
 }

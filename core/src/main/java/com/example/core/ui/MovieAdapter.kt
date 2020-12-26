@@ -9,9 +9,9 @@ import com.example.core.R
 import com.example.core.databinding.MovieItemLayoutBinding
 import com.example.core.domain.model.Movie
 
-class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter() : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
-    private var movies: ArrayList<Movie> = ArrayList()
+    private val movies = mutableListOf<Movie>()
     private lateinit var onItemClick: (movie: Movie) -> Unit
 
     fun setOnItemClick(onItemClick: (movie: Movie) -> Unit) {
@@ -25,10 +25,13 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bind(movies[position])
+        val movies = movies[position]
+        holder.bind(movies)
     }
 
-    override fun getItemCount(): Int = movies.count()
+    override fun getItemCount(): Int {
+        return movies.size
+    }
 
     fun setDataSet(movies: List<Movie>?) {
         if (movies == null) return

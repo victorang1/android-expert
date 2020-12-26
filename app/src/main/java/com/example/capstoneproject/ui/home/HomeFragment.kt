@@ -5,19 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.capstoneproject.R
 import com.example.capstoneproject.databinding.HomeFragmentBinding
 import com.example.core.data.Resource
 import com.example.core.ui.MovieAdapter
 import kotlinx.android.synthetic.main.view_error.view.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: HomeFragmentBinding
-    private val homeViewModel: HomeViewModel by viewModels()
-    private val adapter: MovieAdapter by lazy { MovieAdapter() }
+    private val homeViewModel: HomeViewModel by viewModel()
+    private val mAdapter: MovieAdapter by lazy { MovieAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +33,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setObserver()
+        setAdapter()
     }
 
     private fun setObserver() {
@@ -40,7 +43,7 @@ class HomeFragment : Fragment() {
                     is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
                     is Resource.Success -> {
                         binding.progressBar.visibility = View.GONE
-                        adapter.setDataSet(movies.data)
+                        mAdapter.setDataSet(movies.data)
                     }
                     is Resource.Error -> {
                         binding.progressBar.visibility = View.GONE
@@ -50,5 +53,16 @@ class HomeFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun setAdapter() {
+        mAdapter.setOnItemClick {
+            val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(it)
+            findNavController().navigate(action)
+        }
+        with(binding.rvMovies) {
+            layoutManager = LinearLayoutManager(context)
+            adapter = mAdapter
+        }
     }
 }
