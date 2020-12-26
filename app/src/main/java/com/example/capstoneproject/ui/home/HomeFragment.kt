@@ -1,5 +1,6 @@
 package com.example.capstoneproject.ui.home
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +16,7 @@ import com.example.core.ui.MovieAdapter
 import kotlinx.android.synthetic.main.view_error.view.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), View.OnClickListener {
 
     private lateinit var binding: HomeFragmentBinding
     private val homeViewModel: HomeViewModel by viewModel()
@@ -32,8 +33,18 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.fabFavorite.setOnClickListener(this)
         setObserver()
         setAdapter()
+    }
+
+    override fun onClick(view: View) {
+        when (view) {
+            binding.fabFavorite -> {
+                val action = HomeFragmentDirections.actionHomeFragmentToFavoriteFragment()
+                findNavController().navigate(action)
+            }
+        }
     }
 
     private fun setObserver() {

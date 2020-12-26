@@ -40,10 +40,5 @@ class MovieRepositoryImpl(
             }
         }.asFlow()
 
-    override fun setFavorite(movie: Movie, status: Boolean) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val entity = MappingUtil.mapDomainToEntities(movie)
-            localDataSource.updateMovie(entity, status)
-        }
-    }
+
 }

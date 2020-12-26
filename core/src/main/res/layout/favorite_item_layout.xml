@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="favorite"
+            type="com.example.core.domain.model.Favorite" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_film"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_8dp"
+        android:layout_marginLeft="@dimen/dimen_2dp"
+        android:layout_marginRight="@dimen/dimen_2dp"
+        app:cardElevation="@dimen/dimen_4dp"
+        app:cardCornerRadius="@dimen/dimen_8dp"
+        app:cardBackgroundColor="@color/purple_700"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimen_12dp"
+            >
+
+            <ImageView
+                android:id="@+id/iv_thumbnail"
+                android:layout_width="@dimen/default_img_width"
+                android:layout_height="@dimen/default_img_height"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:contentDescription="@string/text_movie_thumbnail" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_8dp"
+                android:layout_marginEnd="@dimen/dimen_8dp"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_18sp"
+                android:fontFamily="serif"
+                android:text="@{favorite.title}"
+                tools:text="Avenger: Infinity War"
+                app:layout_constraintLeft_toRightOf="@id/iv_thumbnail"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/tv_popularity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:layout_marginStart="@dimen/dimen_8dp"
+                android:layout_marginEnd="@dimen/dimen_8dp"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_16sp"
+                android:fontFamily="sans-serif"
+                android:text="@{favorite.popularityDisplay}"
+                tools:text="4229.264"
+                app:drawableStartCompat="@drawable/ic_star"
+                android:drawablePadding="@dimen/dimen_8dp"
+                app:layout_constraintLeft_toRightOf="@id/iv_thumbnail"
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/tv_votes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:layout_marginStart="@dimen/dimen_8dp"
+                android:layout_marginEnd="@dimen/dimen_8dp"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_16sp"
+                android:fontFamily="sans-serif"
+                android:text="@{favorite.voteCountDisplay}"
+                tools:text="230"
+                app:drawableStartCompat="@drawable/ic_thumb_up"
+                android:drawablePadding="@dimen/dimen_8dp"
+                app:layout_constraintLeft_toRightOf="@id/iv_thumbnail"
+                app:layout_constraintTop_toBottomOf="@id/tv_popularity"
+                app:layout_constraintRight_toRightOf="parent"
+                />
+
+            <Button
+                android:id="@+id/btn_remove"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:layout_marginStart="@dimen/dimen_8dp"
+                android:paddingLeft="@dimen/dimen_12dp"
+                android:paddingRight="@dimen/dimen_12dp"
+                android:background="@color/cardview_light_background"
+                android:text="@string/remove_from_favorite"
+                app:layout_constraintLeft_toRightOf="@id/iv_thumbnail"
+                app:layout_constraintTop_toBottomOf="@id/tv_votes"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

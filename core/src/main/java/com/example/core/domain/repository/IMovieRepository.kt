@@ -7,5 +7,4 @@ import kotlinx.coroutines.flow.Flow
 interface IMovieRepository {
 
     fun getMovieData(): Flow<Resource<List<Movie>>>
-    fun setFavorite(movie: Movie, status: Boolean)
 }

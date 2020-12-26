@@ -13,8 +13,7 @@ data class Movie(
     val popularity: Double,
     val voteCount: Long,
     val releaseDate: String,
-    val overview: String,
-    val isFavorite: Boolean
+    val overview: String
 ) : BaseObservable(), Parcelable {
 
     @Bindable

@@ -9,7 +9,7 @@ import com.example.core.R
 import com.example.core.databinding.MovieItemLayoutBinding
 import com.example.core.domain.model.Movie
 
-class MovieAdapter() : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     private val movies = mutableListOf<Movie>()
     private lateinit var onItemClick: (movie: Movie) -> Unit

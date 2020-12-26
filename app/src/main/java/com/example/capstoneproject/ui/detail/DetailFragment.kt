@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -18,7 +19,6 @@ class DetailFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: DetailFragmentBinding
     private val mViewModel: DetailViewModel by viewModel()
     private val args: DetailFragmentArgs by navArgs()
-    private var isFavorite: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,6 +26,7 @@ class DetailFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = DetailFragmentBinding.inflate(inflater, container, false)
+        setObserver()
         return binding.root
     }
 
@@ -43,12 +44,10 @@ class DetailFragment : Fragment(), View.OnClickListener {
 
     private fun handleClickFavorite() {
         try {
-            isFavorite = !isFavorite
-            mViewModel.setFavorite(args.movie, isFavorite)
-            refreshFavoriteStatus()
+            mViewModel.addToFavorite(args.movie)
             Toast.makeText(
                 requireContext(),
-                getString(if (isFavorite) R.string.text_add_to_favorite_success else R.string.text_remove_from_favorite_success),
+                getString(R.string.text_add_to_favorite_success),
                 Toast.LENGTH_SHORT
             ).show()
         } catch (e: Exception) {
@@ -56,17 +55,21 @@ class DetailFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    private fun setObserver() {
+        mViewModel.isFavorite(args.movie.id).observe(viewLifecycleOwner, Observer { isFavorite ->
+            refreshFavoriteStatus(isFavorite)
+        })
+    }
+
     private fun setData() {
         binding.film = args.movie
-        isFavorite = args.movie.isFavorite
         Glide.with(requireContext())
             .load(args.movie.image)
             .apply(RequestOptions.errorOf(R.drawable.ic_error_black))
             .into(binding.ivThumbnail)
-        refreshFavoriteStatus()
     }
 
-    private fun refreshFavoriteStatus() {
+    private fun refreshFavoriteStatus(isFavorite: Boolean) {
         binding.btnFavorite.text = getString(
             if (isFavorite) R.string.remove_from_favorite
             else R.string.add_to_favorite
