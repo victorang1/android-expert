@@ -1,0 +1,6 @@
+package com.example.capstoneproject.ui.home
+
+import androidx.lifecycle.ViewModel
+
+class HomeViewModel : ViewModel() {
+}
