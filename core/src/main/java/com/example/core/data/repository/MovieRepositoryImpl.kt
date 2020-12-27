@@ -9,12 +9,8 @@ import com.example.core.data.source.remote.response.PopularMovieItemResponse
 import com.example.core.domain.model.Movie
 import com.example.core.domain.repository.IMovieRepository
 import com.example.core.utils.MappingUtil
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 
 class MovieRepositoryImpl(
     private val remoteDataSource: RemoteDataSource,
@@ -29,7 +25,7 @@ class MovieRepositoryImpl(
                     MappingUtil.mapEntitiesToDomain(it)
                 }
 
-            override fun shouldFetch(data: List<Movie>?): Boolean = data.isNullOrEmpty()
+            override fun shouldFetch(data: List<Movie>?): Boolean = true
 
             override suspend fun createCall(): Flow<ApiResponse<List<PopularMovieItemResponse>>> =
                 remoteDataSource.getPopularMovies()

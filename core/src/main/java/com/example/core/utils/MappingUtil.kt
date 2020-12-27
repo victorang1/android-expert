@@ -42,6 +42,7 @@ object MappingUtil {
     fun mapEntitiesToFavoriteDomain(input: List<FavoriteEntity>): List<Favorite> =
         input.map {
             Favorite(
+                it.favoriteId,
                 it.filmId,
                 it.image,
                 it.title,
@@ -77,8 +78,8 @@ object MappingUtil {
 
     fun mapDomainToFavoriteEntities(it: Favorite): FavoriteEntity =
         FavoriteEntity(
-            0,
             it.id,
+            it.filmId,
             it.image,
             it.title,
             it.popularity,

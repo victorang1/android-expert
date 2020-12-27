@@ -14,11 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_8dp"
-        android:layout_marginLeft="@dimen/dimen_2dp"
-        android:layout_marginRight="@dimen/dimen_2dp"
+        android:layout_marginStart="@dimen/dimen_12dp"
+        android:layout_marginEnd="@dimen/dimen_12dp"
         app:cardElevation="@dimen/dimen_4dp"
         app:cardCornerRadius="@dimen/dimen_8dp"
-        app:cardBackgroundColor="@color/purple_700"
+        app:cardBackgroundColor="@android:color/transparent"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -99,8 +99,10 @@
                 android:layout_marginStart="@dimen/dimen_8dp"
                 android:paddingLeft="@dimen/dimen_12dp"
                 android:paddingRight="@dimen/dimen_12dp"
-                android:background="@color/cardview_light_background"
+                android:textSize="@dimen/text_16sp"
                 android:text="@string/remove_from_favorite"
+                android:backgroundTint="@color/colorOrange"
+                android:textColor="@color/colorWhite"
                 app:layout_constraintLeft_toRightOf="@id/iv_thumbnail"
                 app:layout_constraintTop_toBottomOf="@id/tv_votes"
                 />

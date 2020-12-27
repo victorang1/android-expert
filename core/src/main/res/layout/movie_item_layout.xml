@@ -13,44 +13,44 @@
         android:id="@+id/cv_film"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_8dp"
-        android:layout_marginLeft="@dimen/dimen_2dp"
-        android:layout_marginRight="@dimen/dimen_2dp"
+        android:layout_marginTop="@dimen/dimen_12dp"
+        android:layout_marginBottom="@dimen/dimen_12dp"
+        android:layout_marginStart="@dimen/dimen_8dp"
+        android:layout_marginEnd="@dimen/dimen_8dp"
         app:cardElevation="@dimen/dimen_4dp"
         app:cardCornerRadius="@dimen/dimen_8dp"
-        app:cardBackgroundColor="@color/purple_700"
+        app:cardBackgroundColor="@android:color/transparent"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/dimen_12dp"
             >
 
             <ImageView
                 android:id="@+id/iv_thumbnail"
-                android:layout_width="@dimen/default_img_width"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/default_img_height"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
                 android:contentDescription="@string/text_movie_thumbnail" />
 
             <TextView
                 android:id="@+id/tv_title"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_8dp"
-                android:layout_marginEnd="@dimen/dimen_8dp"
+                android:layout_marginTop="@dimen/dimen_8dp"
                 android:textColor="@color/colorWhite"
                 android:textStyle="bold"
                 android:textSize="@dimen/text_18sp"
                 android:fontFamily="serif"
                 android:text="@{movie.title}"
                 tools:text="Avenger: Infinity War"
-                app:layout_constraintLeft_toRightOf="@id/iv_thumbnail"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_thumbnail"
                 />
 
             <TextView
@@ -58,54 +58,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_8dp"
-                android:layout_marginStart="@dimen/dimen_8dp"
-                android:layout_marginEnd="@dimen/dimen_8dp"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/text_18sp"
                 android:fontFamily="serif"
                 android:text="@{movie.releaseDate}"
                 tools:text="2018"
-                app:layout_constraintLeft_toRightOf="@id/iv_thumbnail"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_title"
-                app:layout_constraintRight_toRightOf="parent"
-                />
-
-            <TextView
-                android:id="@+id/tv_popularity"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_8dp"
-                android:layout_marginStart="@dimen/dimen_8dp"
-                android:layout_marginEnd="@dimen/dimen_8dp"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/text_16sp"
-                android:fontFamily="sans-serif"
-                android:text="@{movie.popularityDisplay}"
-                tools:text="4229.264"
-                app:drawableStartCompat="@drawable/ic_star"
-                android:drawablePadding="@dimen/dimen_8dp"
-                app:layout_constraintLeft_toRightOf="@id/iv_thumbnail"
-                app:layout_constraintTop_toBottomOf="@id/tv_year"
-                app:layout_constraintRight_toRightOf="parent"
-                />
-
-            <TextView
-                android:id="@+id/tv_votes"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_8dp"
-                android:layout_marginStart="@dimen/dimen_8dp"
-                android:layout_marginEnd="@dimen/dimen_8dp"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/text_16sp"
-                android:fontFamily="sans-serif"
-                android:text="@{movie.voteCountDisplay}"
-                tools:text="230"
-                app:drawableStartCompat="@drawable/ic_thumb_up"
-                android:drawablePadding="@dimen/dimen_8dp"
-                app:layout_constraintLeft_toRightOf="@id/iv_thumbnail"
-                app:layout_constraintTop_toBottomOf="@id/tv_popularity"
-                app:layout_constraintRight_toRightOf="parent"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

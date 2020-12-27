@@ -7,14 +7,25 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.capstoneproject.databinding.DetailFragmentBinding
 import com.example.core.R
+import com.example.core.utils.onClick
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class DetailFragment : Fragment(), View.OnClickListener {
+@ExperimentalCoroutinesApi
+class DetailFragment : Fragment() {
+
+    companion object {
+        const val SOURCE_HOME = "home"
+        const val SOURCE_FAVORITE = "favorite"
+    }
 
     private lateinit var binding: DetailFragmentBinding
     private val mViewModel: DetailViewModel by viewModel()
@@ -26,20 +37,16 @@ class DetailFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = DetailFragmentBinding.inflate(inflater, container, false)
+        activity?.title = args.movie.title
+        setListener()
         setObserver()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnFavorite.setOnClickListener(this)
+        binding.btnFavorite.visibility = if (args.source == SOURCE_HOME) View.VISIBLE else View.GONE
         setData()
-    }
-
-    override fun onClick(view: View) {
-        when (view) {
-            binding.btnFavorite -> handleClickFavorite()
-        }
     }
 
     private fun handleClickFavorite() {
@@ -53,6 +60,12 @@ class DetailFragment : Fragment(), View.OnClickListener {
         } catch (e: Exception) {
             Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun setListener() {
+        binding.btnFavorite.onClick().onEach {
+            handleClickFavorite()
+        }.launchIn(lifecycleScope)
     }
 
     private fun setObserver() {
@@ -71,8 +84,9 @@ class DetailFragment : Fragment(), View.OnClickListener {
 
     private fun refreshFavoriteStatus(isFavorite: Boolean) {
         binding.btnFavorite.text = getString(
-            if (isFavorite) R.string.remove_from_favorite
+            if (isFavorite) R.string.already_favorite
             else R.string.add_to_favorite
         )
+        binding.btnFavorite.isEnabled = !isFavorite
     }
 }

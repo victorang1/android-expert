@@ -27,13 +27,18 @@ class FavoriteRepositoryImpl(private val localDataSource: LocalDataSource) : IFa
         }
     }
 
+    override fun searchFavorite(name: String): Flow<List<Favorite>> {
+        return localDataSource.searchFavorites(name).map {
+            MappingUtil.mapEntitiesToFavoriteDomain(it)
+        }
+    }
+
     override fun isFavorite(movieId: Int): Flow<Boolean> {
         return localDataSource.isFavorite(movieId).map { it != null }
     }
 
-    override fun getFavoriteData(): Flow<List<Favorite>> {
-        return localDataSource.getAllFavorites().map {
+    override fun getFavoriteData(): Flow<List<Favorite>> =
+        localDataSource.getAllFavorites().map {
             MappingUtil.mapEntitiesToFavoriteDomain(it)
         }
-    }
 }

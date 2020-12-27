@@ -24,6 +24,9 @@
         android:label="DetailFragment" >
         <argument android:name="movie"
             app:argType="com.example.core.domain.model.Movie" />
+        <argument
+            android:name="source"
+            app:argType="string" />
     </fragment>
 
     <fragment

@@ -8,6 +8,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Favorite(
     val id: Int,
+    val filmId: Int,
     val image: String,
     val title: String,
     val popularity: Double,

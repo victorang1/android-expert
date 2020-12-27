@@ -4,10 +4,11 @@
     <dimen name="dimen_2dp">2dp</dimen>
     <dimen name="dimen_8dp">8dp</dimen>
     <dimen name="dimen_12dp">12dp</dimen>
+    <dimen name="dimen_20dp">20dp</dimen>
     <dimen name="dimen_24dp">24dp</dimen>
     <dimen name="dimen_36dp">36dp</dimen>
-    <dimen name="default_img_width">100dp</dimen>
-    <dimen name="default_img_height">130dp</dimen>
+    <dimen name="default_img_width">130dp</dimen>
+    <dimen name="default_img_height">180dp</dimen>
 
     <dimen name="large_img_width">150dp</dimen>
     <dimen name="large_img_height">200dp</dimen>

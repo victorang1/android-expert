@@ -1,6 +1,5 @@
 package com.example.core.domain.interactor
 
-import com.example.core.data.Resource
 import com.example.core.domain.model.Favorite
 import com.example.core.domain.model.Movie
 import com.example.core.domain.repository.IFavoriteRepository
@@ -13,6 +12,8 @@ class FavoriteInteractor(private val favoriteRepository: IFavoriteRepository) : 
 
     override fun removeFavorite(favorite: Favorite) =
         favoriteRepository.removeFromFavorite(favorite)
+
+    override fun searchFavorite(name: String): Flow<List<Favorite>> = favoriteRepository.searchFavorite(name)
 
     override fun checkIsFavorite(movieId: Int): Flow<Boolean> =
         favoriteRepository.isFavorite(movieId)

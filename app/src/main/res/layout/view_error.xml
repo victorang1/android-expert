@@ -10,6 +10,7 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="4dp"
         android:gravity="center"
+        android:textColor="@color/colorYellow"
         android:text="@string/something_wrong"
         android:textSize="18sp" />
 

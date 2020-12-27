@@ -2,8 +2,6 @@ package com.example.core.data.source.local.room
 
 import androidx.room.*
 import com.example.core.data.source.local.entity.FavoriteEntity
-import com.example.core.data.source.local.entity.MovieEntity
-import com.example.core.domain.model.Favorite
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -14,6 +12,9 @@ interface FavoriteDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavorite(favorite: FavoriteEntity)
+
+    @Query("SELECT * FROM favorite where title LIKE '%' || :title || '%'")
+    fun searchFavorites(title: String): Flow<List<FavoriteEntity>>
 
     @Query("SELECT * FROM favorite where filmId=:movieId")
     fun isFavorite(movieId: Int): Flow<FavoriteEntity>

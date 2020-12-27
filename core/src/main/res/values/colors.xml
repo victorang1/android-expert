@@ -3,4 +3,7 @@
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#030300</color>
+    <color name="colorOrange">#f9c700</color>
+    <color name="colorYellow">#ffe11d</color>
 </resources>

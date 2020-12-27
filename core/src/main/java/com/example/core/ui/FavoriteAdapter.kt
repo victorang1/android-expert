@@ -8,15 +8,19 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.core.R
 import com.example.core.databinding.FavoriteItemLayoutBinding
 import com.example.core.domain.model.Favorite
-import com.example.core.domain.model.Movie
 
 class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
 
     private val favorites = mutableListOf<Favorite>()
     private lateinit var onItemClick: (favorite: Favorite) -> Unit
+    private lateinit var onDeleteClick: (favorite: Favorite) -> Unit
 
     fun setOnItemClick(onItemClick: (favorite: Favorite) -> Unit) {
         this.onItemClick = onItemClick
+    }
+
+    fun setOnDeleteClick(onDeleteClick: (favorite: Favorite) -> Unit) {
+        this.onDeleteClick = onDeleteClick
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
@@ -48,6 +52,7 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>
             with(itemBinding) {
                 favorite = favoriteData
                 cvFilm.setOnClickListener { onItemClick.invoke(favoriteData) }
+                btnRemove.setOnClickListener{ onDeleteClick.invoke(favoriteData) }
                 Glide.with(root)
                     .load(favoriteData.image)
                     .apply(RequestOptions.errorOf(R.drawable.ic_error_white))

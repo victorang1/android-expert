@@ -15,6 +15,8 @@ class LocalDataSource(private val movieDao: MovieDao, private val favoriteDao: F
 
     fun getAllFavorites(): Flow<List<FavoriteEntity>> = favoriteDao.getFavorites()
 
+    fun searchFavorites(name: String): Flow<List<FavoriteEntity>> = favoriteDao.searchFavorites(name)
+
     suspend fun insertFavorite(favorite: FavoriteEntity) = favoriteDao.insertFavorite(favorite)
 
     fun isFavorite(movieId: Int): Flow<FavoriteEntity> = favoriteDao.isFavorite(movieId).distinctUntilChanged()
