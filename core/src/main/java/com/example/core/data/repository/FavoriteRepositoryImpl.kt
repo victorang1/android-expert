@@ -20,21 +20,16 @@ class FavoriteRepositoryImpl(private val localDataSource: LocalDataSource) : IFa
         }
     }
 
-    override fun removeFromFavorite(favorite: Favorite) {
+    override fun removeFromFavorite(movie: Movie) {
         CoroutineScope(Dispatchers.IO).launch {
-            val favoriteEntity = MappingUtil.mapDomainToFavoriteEntities(favorite)
-            localDataSource.removeFavorite(favoriteEntity)
-        }
-    }
-
-    override fun searchFavorite(name: String): Flow<List<Favorite>> {
-        return localDataSource.searchFavorites(name).map {
-            MappingUtil.mapEntitiesToFavoriteDomain(it)
+            localDataSource.removeFavorite(movie.id)
         }
     }
 
     override fun isFavorite(movieId: Int): Flow<Boolean> {
-        return localDataSource.isFavorite(movieId).map { it != null }
+        return localDataSource.isFavorite(movieId).map {
+            !it.isNullOrEmpty()
+        }
     }
 
     override fun getFavoriteData(): Flow<List<Favorite>> =

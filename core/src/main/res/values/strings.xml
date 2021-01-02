@@ -15,7 +15,7 @@
 
     <string name="text_network_error">Something went wrong please try again later</string>
     <string name="add_to_favorite">Add to Favorite</string>
-    <string name="already_favorite">Already added to favorite</string>
+    <string name="already_favorite">Remove From Favorite</string>
     <string name="remove_from_favorite">Remove</string>
     <string name="text_confirmation">Confirmation</string>
     <string name="text_add_favorite_dialog">Are you sure you want to add this film to favorite?</string>

@@ -91,22 +91,6 @@
                 app:layout_constraintRight_toRightOf="parent"
                 />
 
-            <Button
-                android:id="@+id/btn_remove"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_8dp"
-                android:layout_marginStart="@dimen/dimen_8dp"
-                android:paddingLeft="@dimen/dimen_12dp"
-                android:paddingRight="@dimen/dimen_12dp"
-                android:textSize="@dimen/text_16sp"
-                android:text="@string/remove_from_favorite"
-                android:backgroundTint="@color/colorOrange"
-                android:textColor="@color/colorWhite"
-                app:layout_constraintLeft_toRightOf="@id/iv_thumbnail"
-                app:layout_constraintTop_toBottomOf="@id/tv_votes"
-                />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

@@ -3,7 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="errorMessage"
+            type="String" />
+        <variable
+            name="errorVisibility"
+            type="Integer" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,20 +16,24 @@
         android:layout_height="match_parent"
         >
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_20dp"
-            android:text="@string/app_name"
-            android:textSize="@dimen/text_36sp"
-            android:textColor="@color/colorOrange"
-            android:textAlignment="center"
+            android:layout_margin="@dimen/dimen_20dp"
+            android:id="@+id/et_search"
+            android:paddingTop="@dimen/dimen_12dp"
+            android:paddingBottom="@dimen/dimen_12dp"
+            android:paddingStart="@dimen/dimen_8dp"
+            android:paddingEnd="@dimen/dimen_8dp"
+            android:autofillHints="@string/text_search_hint"
+            android:inputType="text"
+            android:background="@drawable/border"
+            android:textColor="@color/white"
+            android:hint="@string/text_search_hint"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             />
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_movies"
@@ -36,7 +45,7 @@
             android:layout_marginBottom="@dimen/dimen_8dp"
             android:layoutAnimation="@anim/layout_animation"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/et_search"
             app:layout_constraintBottom_toBottomOf="parent"
             />
 
@@ -55,14 +64,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <include
-            android:id="@+id/view_error"
-            layout="@layout/view_error"
-            android:visibility="gone"
+        <TextView
+            android:id="@+id/tv_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:textColor="@color/colorYellow"
+            android:textSize="18sp"
+            android:visibility="@{errorVisibility}"
+            android:text="@{errorMessage}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_favorite"

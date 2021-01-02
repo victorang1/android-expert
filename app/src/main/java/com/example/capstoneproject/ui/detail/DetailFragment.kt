@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -22,14 +22,10 @@ import org.koin.android.viewmodel.ext.android.viewModel
 @ExperimentalCoroutinesApi
 class DetailFragment : Fragment() {
 
-    companion object {
-        const val SOURCE_HOME = "home"
-        const val SOURCE_FAVORITE = "favorite"
-    }
-
     private lateinit var binding: DetailFragmentBinding
     private val mViewModel: DetailViewModel by viewModel()
     private val args: DetailFragmentArgs by navArgs()
+    private var isFavorite: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,7 +33,7 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DetailFragmentBinding.inflate(inflater, container, false)
-        activity?.title = args.movie.title
+        binding.isLoading = true
         setListener()
         setObserver()
         return binding.root
@@ -45,18 +41,27 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnFavorite.visibility = if (args.source == SOURCE_HOME) View.VISIBLE else View.GONE
         setData()
     }
 
     private fun handleClickFavorite() {
         try {
-            mViewModel.addToFavorite(args.movie)
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.text_add_to_favorite_success),
-                Toast.LENGTH_SHORT
-            ).show()
+            if (isFavorite) {
+                mViewModel.deleteFromFavorite(args.movie)
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.text_remove_from_favorite_success),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            else {
+                mViewModel.addToFavorite(args.movie)
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.text_add_to_favorite_success),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         } catch (e: Exception) {
             Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
         }
@@ -69,9 +74,11 @@ class DetailFragment : Fragment() {
     }
 
     private fun setObserver() {
-        mViewModel.isFavorite(args.movie.id).observe(viewLifecycleOwner, Observer { isFavorite ->
+        mViewModel.isFavorite(args.movie.id).observe(viewLifecycleOwner) { isFavorite ->
+            binding.isLoading = false
+            this.isFavorite = isFavorite
             refreshFavoriteStatus(isFavorite)
-        })
+        }
     }
 
     private fun setData() {
@@ -87,6 +94,5 @@ class DetailFragment : Fragment() {
             if (isFavorite) R.string.already_favorite
             else R.string.add_to_favorite
         )
-        binding.btnFavorite.isEnabled = !isFavorite
     }
 }

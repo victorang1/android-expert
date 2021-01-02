@@ -10,6 +10,8 @@ import com.example.core.domain.model.Movie
 import com.example.core.domain.repository.IMovieRepository
 import com.example.core.utils.MappingUtil
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 
 class MovieRepositoryImpl(
@@ -36,5 +38,21 @@ class MovieRepositoryImpl(
             }
         }.asFlow()
 
-
+    override suspend fun searchMovie(name: String): Flow<Resource<List<Movie>>> {
+        return flow {
+            when (val apiResponse = remoteDataSource.searchMovie(name).first()) {
+                is ApiResponse.Success -> {
+                    val searchedMovies = MappingUtil.mapResponsesToEntities(apiResponse.data)
+                    val domainEntities = MappingUtil.mapEntitiesToDomain(searchedMovies)
+                    emit(Resource.Success<List<Movie>>(domainEntities))
+                }
+                is ApiResponse.Empty -> {
+                    emit(Resource.Success<List<Movie>>(mutableListOf()))
+                }
+                is ApiResponse.Error -> {
+                    emit(Resource.Error<List<Movie>>(apiResponse.errorMessage))
+                }
+            }
+        }
+    }
 }

@@ -13,12 +13,9 @@ interface FavoriteDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavorite(favorite: FavoriteEntity)
 
-    @Query("SELECT * FROM favorite where title LIKE '%' || :title || '%'")
-    fun searchFavorites(title: String): Flow<List<FavoriteEntity>>
-
     @Query("SELECT * FROM favorite where filmId=:movieId")
-    fun isFavorite(movieId: Int): Flow<FavoriteEntity>
+    fun isFavorite(movieId: Int): Flow<List<FavoriteEntity>>
 
-    @Delete
-    suspend fun deleteFavorite(favorite: FavoriteEntity)
+    @Query("DELETE FROM favorite where filmId=:id")
+    suspend fun deleteFavorite(id: Int)
 }

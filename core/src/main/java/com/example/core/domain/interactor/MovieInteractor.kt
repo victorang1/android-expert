@@ -9,4 +9,6 @@ import kotlinx.coroutines.flow.Flow
 class MovieInteractor(private val movieRepository: IMovieRepository) : MovieUseCase {
 
     override fun getAllMovie(): Flow<Resource<List<Movie>>> = movieRepository.getMovieData()
+
+    override suspend fun searchMovie(name: String): Flow<Resource<List<Movie>>> = movieRepository.searchMovie(name)
 }

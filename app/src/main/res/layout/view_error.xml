@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,7 +12,7 @@
         android:layout_marginTop="4dp"
         android:gravity="center"
         android:textColor="@color/colorYellow"
-        android:text="@string/something_wrong"
+        android:text="@{message}"
         android:textSize="18sp" />
 
 </RelativeLayout>

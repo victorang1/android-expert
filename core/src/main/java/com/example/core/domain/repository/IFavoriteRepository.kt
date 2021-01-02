@@ -6,8 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface IFavoriteRepository {
     fun insertToFavorite(movie: Movie)
-    fun removeFromFavorite(favorite: Favorite)
-    fun searchFavorite(name: String): Flow<List<Favorite>>
+    fun removeFromFavorite(movie: Movie)
     fun isFavorite(movieId: Int): Flow<Boolean>
     fun getFavoriteData(): Flow<List<Favorite>>
 }
