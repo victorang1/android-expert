@@ -11,7 +11,7 @@ data class Favorite(
     val popularity: Double,
     val voteCount: Long,
     val releaseDate: String,
-    val overview: String,
+    val overview: String
 ) : BaseObservable() {
 
     @Bindable
