@@ -55,7 +55,7 @@ object MappingUtil {
 
     fun mapFavoriteToMovie(favorite: Favorite): Movie =
         Movie(
-            favorite.id,
+            favorite.filmId,
             favorite.image,
             favorite.title,
             favorite.popularity,
@@ -68,18 +68,6 @@ object MappingUtil {
         FavoriteEntity(
             0,
             it.id,
-            it.image,
-            it.title,
-            it.popularity,
-            it.voteCount,
-            it.releaseDate,
-            it.overview
-        )
-
-    fun mapDomainToFavoriteEntities(it: Favorite): FavoriteEntity =
-        FavoriteEntity(
-            it.id,
-            it.filmId,
             it.image,
             it.title,
             it.popularity,

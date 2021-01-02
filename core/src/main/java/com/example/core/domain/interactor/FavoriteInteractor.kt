@@ -10,10 +10,8 @@ class FavoriteInteractor(private val favoriteRepository: IFavoriteRepository) : 
 
     override fun addFavorite(movie: Movie) = favoriteRepository.insertToFavorite(movie)
 
-    override fun removeFavorite(favorite: Favorite) =
-        favoriteRepository.removeFromFavorite(favorite)
-
-    override fun searchFavorite(name: String): Flow<List<Favorite>> = favoriteRepository.searchFavorite(name)
+    override fun removeFavorite(movie: Movie) =
+        favoriteRepository.removeFromFavorite(movie)
 
     override fun checkIsFavorite(movieId: Int): Flow<Boolean> =
         favoriteRepository.isFavorite(movieId)

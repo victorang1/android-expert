@@ -8,4 +8,10 @@ interface ApiService {
 
     @GET("movie/popular")
     suspend fun getPopularMovies(@Query("api_key") apiKey: String): PopularMovieResponse
+
+    @GET("search/movie")
+    suspend fun searchMovie(
+        @Query("api_key") apiKey: String,
+        @Query("query") name: String
+    ): PopularMovieResponse
 }
