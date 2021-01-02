@@ -6,23 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.capstoneproject.databinding.DetailFragmentBinding
 import com.example.core.R
-import com.example.core.utils.onClick
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import org.koin.android.viewmodel.ext.android.viewModel
 
 @ExperimentalCoroutinesApi
-class DetailFragment : Fragment() {
+class DetailFragment : Fragment(), View.OnClickListener {
 
-    private lateinit var binding: DetailFragmentBinding
+    private var _binding: DetailFragmentBinding? = null
+    private val binding get() = _binding!!
     private val mViewModel: DetailViewModel by viewModel()
     private val args: DetailFragmentArgs by navArgs()
     private var isFavorite: Boolean = false
@@ -32,7 +29,7 @@ class DetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DetailFragmentBinding.inflate(inflater, container, false)
+        _binding = DetailFragmentBinding.inflate(inflater, container, false)
         binding.isLoading = true
         setListener()
         setObserver()
@@ -42,6 +39,12 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setData()
+    }
+
+    override fun onClick(v: View?) {
+        when (v) {
+            binding.btnFavorite -> handleClickFavorite()
+        }
     }
 
     private fun handleClickFavorite() {
@@ -68,9 +71,7 @@ class DetailFragment : Fragment() {
     }
 
     private fun setListener() {
-        binding.btnFavorite.onClick().onEach {
-            handleClickFavorite()
-        }.launchIn(lifecycleScope)
+        binding.btnFavorite.setOnClickListener(this)
     }
 
     private fun setObserver() {
@@ -94,5 +95,10 @@ class DetailFragment : Fragment() {
             if (isFavorite) R.string.already_favorite
             else R.string.add_to_favorite
         )
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
