@@ -17,7 +17,8 @@ import org.koin.core.context.loadKoinModules
 @ExperimentalCoroutinesApi
 class FavoriteFragment : Fragment() {
 
-    private lateinit var binding: FavoriteFragmentBinding
+    private var _binding: FavoriteFragmentBinding? = null
+    private val binding get() = _binding!!
     private val mAdapter: FavoriteAdapter by lazy { FavoriteAdapter() }
     private val viewModel: FavoriteViewModel by viewModel()
 
@@ -26,7 +27,7 @@ class FavoriteFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FavoriteFragmentBinding.inflate(inflater, container, false)
+        _binding = FavoriteFragmentBinding.inflate(inflater, container, false)
         loadKoinModules(favoriteModule)
         return binding.root
     }
@@ -59,5 +60,11 @@ class FavoriteFragment : Fragment() {
             layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
             adapter = mAdapter
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.rvFavorite.adapter = null
+        _binding = null
     }
 }

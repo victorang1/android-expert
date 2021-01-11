@@ -15,20 +15,18 @@ import com.example.capstoneproject.databinding.HomeFragmentBinding
 import com.example.core.data.Resource
 import com.example.core.domain.model.Movie
 import com.example.core.ui.MovieAdapter
-import com.example.core.utils.onClick
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.viewModel
 
 @ExperimentalCoroutinesApi
 @FlowPreview
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), View.OnClickListener {
 
-    private lateinit var binding: HomeFragmentBinding
+    private var _binding: HomeFragmentBinding? = null
+    private val binding get() = _binding!!
     private val homeViewModel: HomeViewModel by viewModel()
     private val mAdapter: MovieAdapter by lazy { MovieAdapter() }
 
@@ -37,7 +35,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = HomeFragmentBinding.inflate(inflater, container, false)
+        _binding = HomeFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -48,11 +46,17 @@ class HomeFragment : Fragment() {
         setAdapter()
     }
 
+    override fun onClick(v: View) {
+        when (v) {
+            binding.fabFavorite -> {
+                val action = HomeFragmentDirections.actionHomeFragmentToFavoriteFragment()
+                findNavController().navigate(action)
+            }
+        }
+    }
+
     private fun setListener() {
-        binding.fabFavorite.onClick().onEach {
-            val action = HomeFragmentDirections.actionHomeFragmentToFavoriteFragment()
-            findNavController().navigate(action)
-        }.launchIn(lifecycleScope)
+        binding.fabFavorite.setOnClickListener(this)
 
         binding.etSearch.doAfterTextChanged {
             binding.progressBar.visibility = View.VISIBLE
@@ -113,5 +117,11 @@ class HomeFragment : Fragment() {
             layoutManager = GridLayoutManager(context, 2)
             adapter = mAdapter
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.rvMovies.adapter = null
+        _binding = null
     }
 }
