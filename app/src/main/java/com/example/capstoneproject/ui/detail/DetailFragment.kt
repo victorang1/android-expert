@@ -69,7 +69,7 @@ class DetailFragment : Fragment() {
     }
 
     private fun setObserver() {
-        mViewModel.isFavorite(args.movie.id).observe(viewLifecycleOwner, Observer { isFavorite ->
+        mViewModel.isFavorite(args.movie.id).observe(viewLifecycleOwner, { isFavorite ->
             refreshFavoriteStatus(isFavorite)
         })
     }

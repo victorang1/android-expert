@@ -19,7 +19,7 @@ class LocalDataSource(private val movieDao: MovieDao, private val favoriteDao: F
 
     suspend fun insertFavorite(favorite: FavoriteEntity) = favoriteDao.insertFavorite(favorite)
 
-    fun isFavorite(movieId: Int): Flow<FavoriteEntity> = favoriteDao.isFavorite(movieId).distinctUntilChanged()
+    fun isFavorite(movieId: Int): Flow<FavoriteEntity?> = favoriteDao.isFavorite(movieId).distinctUntilChanged()
 
     suspend fun removeFavorite(favorite: FavoriteEntity) = favoriteDao.deleteFavorite(favorite)
 }

@@ -17,7 +17,7 @@ interface FavoriteDao {
     fun searchFavorites(title: String): Flow<List<FavoriteEntity>>
 
     @Query("SELECT * FROM favorite where filmId=:movieId")
-    fun isFavorite(movieId: Int): Flow<FavoriteEntity>
+    fun isFavorite(movieId: Int): Flow<FavoriteEntity?>
 
     @Delete
     suspend fun deleteFavorite(favorite: FavoriteEntity)
