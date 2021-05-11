@@ -3,7 +3,6 @@ package com.example.favorite
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.core.domain.model.Favorite
 import com.example.core.ui.FavoriteAdapter
@@ -26,7 +25,7 @@ class FavoriteFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FavoriteFragmentBinding.inflate(inflater, container, false)
         loadKoinModules(favoriteModule)
         return binding.root
@@ -39,7 +38,7 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun setObserver() {
-        viewModel.favorites.observe(viewLifecycleOwner, Observer { favorites ->
+        viewModel.favorites.observe(viewLifecycleOwner, { favorites ->
             handleResults(favorites)
         })
     }
