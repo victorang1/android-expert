@@ -44,7 +44,7 @@ class MovieRepositoryImpl(
                 is ApiResponse.Success -> {
                     val searchedMovies = MappingUtil.mapResponsesToEntities(apiResponse.data)
                     val domainEntities = MappingUtil.mapEntitiesToDomain(searchedMovies)
-                    emit(Resource.Success<List<Movie>>(domainEntities))
+                    emit(Resource.Success(domainEntities))
                 }
                 is ApiResponse.Empty -> {
                     emit(Resource.Success<List<Movie>>(mutableListOf()))
