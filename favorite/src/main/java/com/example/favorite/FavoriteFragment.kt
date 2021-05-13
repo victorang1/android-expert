@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.domain.model.Favorite
 import com.example.core.ui.FavoriteAdapter
 import com.example.core.utils.MappingUtil
@@ -56,7 +57,7 @@ class FavoriteFragment : Fragment() {
             findNavController().navigate(action)
         }
         with(binding.rvFavorite) {
-            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
+            layoutManager = LinearLayoutManager(context)
             adapter = mAdapter
         }
     }
